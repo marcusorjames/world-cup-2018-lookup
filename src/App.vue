@@ -14,7 +14,7 @@
           </template>
         </ais-stats>
         <ais-powered-by></ais-powered-by>
-      </div>
+    </div>
     </div>
       <ais-results>
         <template slot-scope="{ result }">
@@ -40,6 +40,7 @@
                 <ais-highlight :result="result" attribute-name="result"></ais-highlight>
                 <ais-highlight :result="result" attribute-name="away_team"></ais-highlight>
               </h2>
+              <h3>{{ getFantasyPlayer(result.home_team) }} {{ getFantasyPlayer(result.away_team) }}</h3>
             </div>
             <footer class="card-content-footer">
               <div class="card-block">
@@ -85,6 +86,67 @@ export default {
     },
     getFormattedTime(time) {
       return dayjs(time).format('dddd D MMMM H:mm')
+    },
+    getFantasyPlayer(team) {
+      console.log(team)
+      const fantasyMap = {
+        'Eric': [
+          'Australia',
+          'Brazil',
+          'Egypt',
+          'Morocco'
+        ],
+        'Lee': [
+          'France',
+          'Iceland',
+          'Poland',
+          'Saudi Arabia'
+        ],
+        'Liv': [
+          'Croatia',
+          'Denmark',
+          'Senegal',
+          'Switzerland'
+        ],
+        'Lucy': [
+          'England',
+          'Panama',
+          'Spain',
+          'Sweden'
+        ],
+        'Luke': [
+          'Argentina',
+          'Portugal',
+          'South Korea',
+          'Uruguay'
+        ],
+        'Marcus': [
+          'Germany',
+          'Japan',
+          'Nigeria',
+          'Serbia'
+        ],
+        'Robyn': [
+          'Colombia',
+          'Costa Rica',
+          'Mexico',
+          'Peru'
+        ],
+        'Ryan': [
+          'Belgium',
+          'Iran',
+          'Russia',
+          'Tunisia'
+        ]
+      }
+
+      for (let player in fantasyMap) {
+        if (fantasyMap[player].includes(team)) {
+          return player
+        }
+      }
+
+      return ''
     }
   }
 }
